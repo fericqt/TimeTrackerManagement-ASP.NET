@@ -1,0 +1,81 @@
+﻿@model TimeTrackerManagementDTO.UserDTO
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- Modal -->
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalLabel">User Update</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm" action="@Url.Action("UpdateData", "Dashboard")" method="post" enctype="multipart/form-data" onsubmit="return updateUser(this)">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" class="form-control" id="username" name="Username" value="@Model.Username" />
+                        </div>
+                        <div class="form-group">
+                            <label for="createdAt">Created At:</label>
+                            <input type="text" class="form-control" id="createdAt" name="CreatedAt" value="@Model.CreatedAt" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="profileImg">Profile Image:</label>
+                            <img src="data:image/jpeg;base64,@Model.ProfileImgBase64" alt="User Profile Image" class="img-fluid rounded-circle" style="width:75px; height:75px;" />
+                        </div>
+                        <input type="hidden" name="IdTrack" value="@Model.IdTrack" />
+                    </form>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" form="userForm">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $('#userModal').modal('show');
+        // Redirect to the home page when the modal is closed
+        $('#userModal').on('hidden.bs.modal', function () {
+            window.location.href = '@Url.Action(ViewBag.ActionName, ViewBag.ControllerName)';
+        });
+    });
+
+    function updateUser(form) {
+        swal({
+            title: "Are you sure to update this data?",
+            text: "",
+            icon: "info",
+            buttons: true,
+            dangerMode: false,
+        }).then((isOkay) => {
+            if (isOkay) {
+                form.submit();
+            }
+        });
+        return false;
+    }
+</script>
+

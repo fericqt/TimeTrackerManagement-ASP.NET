@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Home/_HomePage.cshtml";
+}
+
+<div class="main">
+    <!-- Sign up form -->
+    <section class="signup" id="signup-section">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form action = "@Url.Action("SaveData", "Home")" method="post" class="register-form" id="register-form" enctype="multipart/form-data" onsubmit="return signupSubmit(this);">
+                        <div class="form-group">
+                            <label for="username">
+                                <i class="zmdi zmdi-account material-icons-name"></i>
+                            </label>
+                            <input type="text"
+                                   name="Username"
+                                   id="username"
+                                   placeholder="Username" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email"
+                                   name="Email"
+                                   id="email"
+                                   placeholder="Your Email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password"
+                                   name="Password"
+                                   id="password"
+                                   placeholder="Password" />
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">
+                                <i class="zmdi zmdi-lock-outline"></i>
+                            </label>
+                            <input type="password"
+                                   name="confirmPassword"
+                                   id="confirmPassword"
+                                   placeholder="Repeat your password" />
+                        </div>
+                        <div class="form-group">
+                            <label for="profileImg">
+                                <i class="zmdi zmdi-image"></i>
+                            </label>
+                            <input type="file"
+                                   name="profile"
+                                   id="profileImg"
+                                   placeholder="Please insert image" />
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox"
+                                   name="agree-term"
+                                   id="agree-term"
+                                   class="agree-term"
+                                   required />
+                            <label for="agree-term" class="label-agree-term">
+                                <span><span></span></span>I agree all statements in
+                                <a href="#" class="term-service">Terms of service</a>
+                            </label>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit"
+                                   name="signup"
+                                   id="signup"
+                                   class="form-submit"
+                                   value="Register" />
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure>
+                        <img src="~/Style/images/signup-image.jpg" alt="sing up image" />
+                    </figure>
+                    <a onclick="showSignInForm()" href="#" class="signup-image-link">I am already member</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sing in  Form -->
+    <section class="sign-in" id="signin-section" style="display: none">
+        <div class="container">
+            <div class="signin-content">
+                <div class="signin-image">
+                    <figure>
+                        <img src="~/Style/images/signin-image.jpg" alt="sing up image" />
+                    </figure>
+                    <a onclick="showSignUpForm()" href="#" class="signup-image-link">Create an account</a>
+                </div>
+
+                <div class="signin-form">
+                    <h2 class="form-title">Login</h2>
+                    <form action="@Url.Action("VerifyLogin", "Home")" method="POST" class="register-form" id="login-form">
+                        <div class="form-group">
+                            <label for="username">
+                                <i class="zmdi zmdi-account material-icons-name"></i>
+                            </label>
+                            <input type="text"
+                                   name="Username"
+                                   id="username"
+                                   placeholder="Username" />
+                        </div>
+                        <div class="form-group">
+                            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password"
+                                   name="Password"
+                                   id="your_pass"
+                                   placeholder="Password" />
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox"
+                                   name="remember-me"
+                                   id="remember-me"
+                                   class="agree-term" />
+                            <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            |
+                            <label for="forgot-password" class="label-agree-term">
+                                <span></span><a id="openModalBtn" href="#">Forgot password?</a>
+                            </label>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit"
+                                   name="signin"
+                                   id="signin"
+                                   class="form-submit"
+                                   value="Log in" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function signupSubmit(form)
+    {
+        swal({
+            title: "Are you sure?",
+            text: "",
+            icon: "info",
+            buttons: true,
+            dangerMode: false,
+        }).then((isOkay) => {
+            if (isOkay) {
+                form.submit();
+            }
+        });
+        return false;
+    }
+</script>
+
+
