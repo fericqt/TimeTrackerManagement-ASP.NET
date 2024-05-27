@@ -44,5 +44,11 @@
     <Compile Include="UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Projects %28Soft App%29\FerPROJ.Design\FerPROJ.Design\FerPROJ.Design.csproj">
+      <Project>{3379010b-3fec-4afc-8db5-8ed0fcbd69bc}</Project>
+      <Name>FerPROJ.Design</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

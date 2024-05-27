@@ -456,6 +456,14 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Projects %28Soft App%29\FerPROJ.DBHelper\FerPROJ.DBHelper\FerPROJ.DBHelper.csproj">
+      <Project>{0f742b57-7fa9-4a45-acd4-ea690d69cc70}</Project>
+      <Name>FerPROJ.DBHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Projects %28Soft App%29\FerPROJ.Design\FerPROJ.Design\FerPROJ.Design.csproj">
+      <Project>{3379010b-3fec-4afc-8db5-8ed0fcbd69bc}</Project>
+      <Name>FerPROJ.Design</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TimeTrackerManagement.EntityData\TimeTrackerManagement.EntityData.csproj">
       <Project>{CF7DF351-E27A-4394-A8A3-7D017B39C7AE}</Project>
       <Name>TimeTrackerManagement.EntityData</Name>

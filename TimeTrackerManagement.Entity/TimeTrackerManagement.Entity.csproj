@@ -106,5 +106,11 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Projects %28Soft App%29\FerPROJ.DBHelper\FerPROJ.DBHelper\FerPROJ.DBHelper.csproj">
+      <Project>{0f742b57-7fa9-4a45-acd4-ea690d69cc70}</Project>
+      <Name>FerPROJ.DBHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
