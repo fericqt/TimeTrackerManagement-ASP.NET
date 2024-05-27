@@ -1,4 +1,9 @@
-﻿<nav class="pcoded-navbar">
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"].ToString();
+    var currentAction = ViewContext.RouteData.Values["action"].ToString();
+}
+
+<nav class="pcoded-navbar">
     <div class="sidebar_toggle">
         <a href="#"><i class="icon-close icons"></i></a>
     </div>
@@ -24,15 +29,15 @@
             Common Function
         </div>
         <ul class="pcoded-item pcoded-left-item">
-            <li id="index" class=" ">
-                <a href="#" class="waves-effect waves-dark">
+            <li id="index" class="@(currentController == "Dashboard" ? "active" : "")">
+                <a href="@Url.Action("Index", "Dashboard")" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <li id="time" class=" ">
-                <a href="#" class="waves-effect waves-dark">
+            <li id="time" class="@(currentController == "Time" ? "active" : "")">
+                <a href="@Url.Action("Index", "Time")" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-alarm-clock"></i></span>
                     <span class="pcoded-mtext" data-i18n="nav.basic-components.main">Manage Time</span>
                     <span class="pcoded-mcaret"></span>
@@ -41,25 +46,3 @@
         </ul>
     </div>
 </nav>
-<script>
-    // Get the current URL path
-    var path = window.location.pathname;
-    var pathParts = path.split('/');
-    var currentPage = pathParts[pathParts.length - 1];
-
-    // Find the elements with class 'pcoded-hasmenu'
-    var indexElement = document.getElementById('index');
-    var timeElement = document.getElementById('time');
-
-    if (currentPage == "index.php") {
-
-        indexElement.classList.add('active');
-        timeElement.classList.remove('active');
-
-    } else if (currentPage == "ManageTime.php") {
-
-        timeElement.classList.add('active');
-        indexElement.classList.remove('active');
-
-    }
-</script>

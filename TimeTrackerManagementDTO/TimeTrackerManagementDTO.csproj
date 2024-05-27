@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TimeDTO.cs" />
     <Compile Include="UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserTimeCountDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Projects %28Soft App%29\FerPROJ.Design\FerPROJ.Design\FerPROJ.Design.csproj">

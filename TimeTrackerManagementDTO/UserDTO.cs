@@ -16,6 +16,7 @@ namespace TimeTrackerManagementDTO
         public string Email { get; set; }
         public byte[] ProfileImg { get; set; }
         public string ProfileImgBase64 { get; set; }
+        public string UserLevel { get; set; } = "Admin";
 
         public override bool DataValidation() {
             throw new NotImplementedException();

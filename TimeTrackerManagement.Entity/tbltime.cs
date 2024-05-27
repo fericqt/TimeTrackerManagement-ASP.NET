@@ -12,14 +12,14 @@ namespace TimeTrackerManagement.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class tbluser
+    public partial class tbltime
     {
         public long IdTrack { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public string Email { get; set; }
-        public byte[] ProfileImg { get; set; }
-        public string UserLevel { get; set; }
+        public Nullable<System.DateTime> TimeIn { get; set; }
+        public Nullable<System.DateTime> TimeOut { get; set; }
+        public Nullable<System.DateTime> DateReference { get; set; }
+        public string Status { get; set; }
+        public decimal TotalHrs { get; set; }
     }
 }

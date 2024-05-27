@@ -14,13 +14,13 @@ namespace TimeTrackerManagement.Entity
     using System.Data.Entity.Infrastructure;
     
     public partial class timetrackerEntities : DbContext
-    {
-    
+    {  
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<tbluser> tblusers { get; set; }
+        public virtual DbSet<tbltime> tbltimes { get; set; }
     }
 }

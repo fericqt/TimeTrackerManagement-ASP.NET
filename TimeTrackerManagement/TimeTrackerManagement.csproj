@@ -246,6 +246,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -444,6 +445,8 @@
     <Content Include="Style\assets\images\Thumbs.db" />
     <Content Include="Views\Includes\ModalAlert.cshtml" />
     <Content Include="Views\Includes\ModalUserUpdate.cshtml" />
+    <Content Include="Views\Time\_TimePage.cshtml" />
+    <Content Include="Views\Time\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

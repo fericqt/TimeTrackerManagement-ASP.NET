@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="d9975572f31641dc89b96e737104c57d" Name="Diagram1">
         <EntityTypeShape EntityType="timetrackerModel.tbluser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="timetrackerModel.tbltime" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

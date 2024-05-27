@@ -60,6 +60,9 @@
   <ItemGroup>
     <Compile Include="EntityConstructor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tbltime.cs">
+      <DependentUpon>TimeTrackerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbluser.cs">
       <DependentUpon>TimeTrackerModel.tt</DependentUpon>
     </Compile>

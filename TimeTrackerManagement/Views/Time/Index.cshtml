@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout = "~/Views/Dashboard/_DashboardPage.cshtml";
+    Layout = "~/Views/Time/_TimePage.cshtml";
     var userDTO = Session["User"] as TimeTrackerManagementDTO.UserDTO;
     ViewBag.Title = "Index";
     ViewBag.ProfileImage = Session["ProfileImg"] as string;
@@ -8,8 +8,11 @@
         ViewBag.Username = userDTO.Username;
     }
 }
+
 @if (userDTO != null) {
-    @model List<TimeTrackerManagementDTO.UserDTO>
+
+    @model TimeTrackerManagement.Controllers.TimeViewModel
+
     <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
@@ -86,7 +89,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-8">
                                         <div class="page-header-title">
-                                            <h5 class="m-b-10"> <i class="fa fa-home"></i> > Dashboard </h5>
+                                            <h5 class="m-b-10"> <i class="fa fa-home"></i> > ManageTime </h5>
                                             <p class="m-b-0">Welcome to Timesheet Tracker System</p>
                                         </div>
                                     </div>
@@ -102,16 +105,18 @@
                                     <div style="margin-top: 100px !important;" class="page-body">
                                         <div class="row">
                                             <!-- task, page, download counter  start -->
-                                            <div class="col-xl-3 col-md-6">
+                                            <div class="col-xl-6 col-md-6">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-purple">30</h4>
-                                                                <h6 class="text-muted m-b-0">Total Users</h6>
+                                                                <h4 class="text-c-purple">@Model.TimeCount.DayPresentCount</h4>
+                                                                <h6 class="text-muted m-b-0">
+                                                                    Total Present
+                                                                </h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-bar-chart f-28"></i>
+                                                                <i class="fa fa-calendar-check-o f-28"></i>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -127,16 +132,50 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6">
+                                            <div class="col-xl-6 col-md-6">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-green">10+</h4>
-                                                                <h6 class="text-muted m-b-0">Active Users</h6>
+                                                                <h4 class="text-c-red">@Model.TimeCount.DayAbsentCount</h4>
+                                                                <h6 class="text-muted m-b-0">
+                                                                    Total Absent
+                                                                </h6>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-file-text-o f-28"></i>
+                                                                <i class="fa fa-calendar-times-o f-28"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer bg-c-red">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-9">
+                                                                <p class="text-white m-b-0">% change</p>
+                                                            </div>
+                                                            <div class="col-3 text-right">
+                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Time In -->
+                                            <div class="col-xl-3 col-md-12">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-4 text-left">
+                                                                <i class="fa fa-hand-o-right f-28"></i>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <form action="@Url.Action("CheckTimeIn", "Time")" method="post" onsubmit="return checkTimeIn(this)">
+                                                                    <button id="btnTimeIn"
+                                                                            style="float:right; padding-left: 35px; padding-right: 35px;"
+                                                                            class="btn btn-success btn-round center waves-effect waves-light"
+                                                                            type="submit">
+                                                                        Time-In
+                                                                    </button>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -152,18 +191,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6">
+                                            <!--  Time Clock -->
+                                            <div class="col-xl-6 col-md-12">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-blue">145</h4>
-                                                                <h6 class="text-muted m-b-0">
-                                                                    Total Day Hours
-                                                                </h6>
+                                                                <h4 id="currentTime" class="text-c-red">00:00:00</h4>
+                                                                <p></p>
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-calendar-check-o f-28"></i>
+                                                                <i class="fa fa-clock-o f-28"></i>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -179,16 +217,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-3 col-md-6">
+                                            <!--  Time Out -->
+                                            <div class="col-xl-3 col-md-12">
                                                 <div class="card">
                                                     <div class="card-block">
                                                         <div class="row align-items-center">
                                                             <div class="col-8">
-                                                                <h4 class="text-c-red">40</h4>
-                                                                <h6 class="text-muted m-b-0">Total Absences</h6>
+
+                                                                <form action="@Url.Action("CheckTimeOut", "Time")" method="post" onsubmit="return checkTimeOut(this)">
+                                                                    <button id="btnTimeIn"
+                                                                            style="float:left; padding-left: 35px; padding-right: 35px;"
+                                                                            class="btn btn-danger btn-round center waves-effect waves-light">
+                                                                        Time-Out
+                                                                    </button>
+                                                                </form>
+
                                                             </div>
                                                             <div class="col-4 text-right">
-                                                                <i class="fa fa-hand-o-down f-28"></i>
+                                                                <i class="fa fa-hand-o-left f-28"></i>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -208,7 +254,7 @@
                                             <div class="col-xl-12 col-md-12">
                                                 <div class="card table-card">
                                                     <div class="card-header">
-                                                        <h5>Users List</h5>
+                                                        <h5>My Timesheet</h5>
                                                     </div>
                                                     <div class="card-block">
                                                         <div class="table-responsive">
@@ -217,31 +263,23 @@
                                                                     <tr>
                                                                         <th>Idtrack</th>
                                                                         <th>Username</th>
-                                                                        <th>CreatedAt</th>
-                                                                        <th>Email</th>
-                                                                        <th>Profile</th>
-                                                                        <th>Action</th>
+                                                                        <th>Time In</th>
+                                                                        <th>Time Out</th>
+                                                                        <th>Status</th>
+                                                                        <th>TotalHrs</th>
+                                                                        <th>Date</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @foreach (var user in Model) {
+                                                                    @foreach (var user in Model.TimeList) {
                                                                         <tr>
                                                                             <td>@user.IdTrack</td>
                                                                             <td>@user.Username</td>
-                                                                            <td>@user.CreatedAt</td>
-                                                                            <td>@user.Email</td>
-                                                                            <td><img class="img-40 img-radius" src="data:image/jpeg;base64,@user.ProfileImgBase64" alt="N/A" /></td>
-                                                                            <td>
-                                                                                <form action="@Url.Action("GetData", "Dashboard")" method="post" style="display:inline;">
-                                                                                    <input type="hidden" name="id" value="@user.IdTrack" />
-                                                                                    <button type="submit">Update</button>
-                                                                                </form>
-                                                                                |
-                                                                                <form action="@Url.Action("DeleteData", "Dashboard")" method="post" style="display:inline;" onsubmit="return deleteUser(this);">
-                                                                                    <input type="hidden" name="id" value="@user.IdTrack" />
-                                                                                    <button type="submit">Delete</button>
-                                                                                </form>
-                                                                            </td>
+                                                                            <td>@user.TimeIn.ToString("h:mm:ss tt")</td>
+                                                                            <td>@user.TimeOut.ToString("h:mm:ss tt")</td>
+                                                                            <td>@user.Status</td>
+                                                                            <td>@user.TotalHrs</td>
+                                                                            <td>@user.DateReference.ToShortDateString()</td>
                                                                         </tr>
                                                                     }
                                                                 </tbody>
@@ -266,13 +304,13 @@
 }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    function deleteUser(form) {
+    function checkTimeIn(form) {
         swal({
-            title: "Are you sure to delete this data?",
+            title: "Are you sure to Time-in?",
             text: "",
-            icon: "warning",
+            icon: "info",
             buttons: true,
-            dangerMode: true,
+            dangerMode: false,
         }).then((isOkay) => {
             if (isOkay) {
                 form.submit();
@@ -280,4 +318,28 @@
         });
         return false;
     }
+    //
+    function checkTimeOut(form) {
+        swal({
+            title: "Are you sure to Time-Out?",
+            text: "",
+            icon: "info",
+            buttons: true,
+            dangerMode: false,
+        }).then((isOkay) => {
+            if (isOkay) {
+                form.submit();
+            }
+        });
+        return false;
+    }
+
+    /*Digital time clock*/
+    window.setInterval(ut, 1000);
+
+    function ut() {
+        var d = new Date();
+        document.getElementById("currentTime").innerHTML = d.toLocaleTimeString();
+    }
 </script>
+
