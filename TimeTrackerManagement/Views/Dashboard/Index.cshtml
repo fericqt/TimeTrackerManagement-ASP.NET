@@ -1,12 +1,12 @@
 ﻿
 @{
+    Layout = "~/Views/Dashboard/_DashboardPage.cshtml";
     var userDTO = Session["User"] as TimeTrackerManagementDTO.UserDTO;
     ViewBag.Title = "Index";
     ViewBag.ProfileImage = Session["ProfileImg"] as string;
     if (userDTO != null) {
         ViewBag.Username = userDTO.Username;
     }
-    Layout = "~/Views/Dashboard/_DashboardPage.cshtml";
 }
 @if (userDTO != null) {
     @model List<TimeTrackerManagementDTO.UserDTO>
