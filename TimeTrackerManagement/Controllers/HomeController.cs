@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TimeTrackerManagement.Entity;
 using TimeTrackerManagement.EntityData;
 using TimeTrackerManagementDTO;
 
@@ -31,8 +32,8 @@ namespace TimeTrackerManagement.Controllers
             using (var MyData = new UserAccountData()) {
                 var tbl = MyData.GetUser(user);
                 if (tbl != null) {
-                    TempData["Username"] = tbl.Username;
-                    TempData["ProfileImg"] = tbl.ProfileImg.ToImage();
+                    Session["User"] = new CMapping<tbluser, UserDTO>().GetMappingResult(tbl);
+                    Session["ProfileImg"] = tbl.ProfileImg.ToImage();
                     return RedirectToAction("Index", "Dashboard"); 
                 }
                 return ShowModal("Index", "Home", "Incorrect username or password!");

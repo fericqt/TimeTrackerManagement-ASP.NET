@@ -1,8 +1,9 @@
 ﻿
 @{
+    var userDTO = Session["User"] as TimeTrackerManagementDTO.UserDTO;
     ViewBag.Title = "Index";
-    ViewBag.Username = TempData["Username"];
-    ViewBag.ProfileImage = TempData["ProfileImg"];
+    ViewBag.ProfileImage = Session["ProfileImg"] as string;
+    ViewBag.Username = userDTO.Username;
     Layout = "~/Views/Dashboard/_DashboardPage.cshtml";
 }
 
