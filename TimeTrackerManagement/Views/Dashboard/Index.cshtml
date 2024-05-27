@@ -3,265 +3,267 @@
     var userDTO = Session["User"] as TimeTrackerManagementDTO.UserDTO;
     ViewBag.Title = "Index";
     ViewBag.ProfileImage = Session["ProfileImg"] as string;
-    ViewBag.Username = userDTO.Username;
+    if (userDTO != null) {
+        ViewBag.Username = userDTO.Username;
+    }
     Layout = "~/Views/Dashboard/_DashboardPage.cshtml";
 }
+@if (userDTO != null) {
+    @model List<TimeTrackerManagementDTO.UserDTO>
+    <!-- Pre-loader start -->
+    <div class="theme-loader">
+        <div class="loader-track">
+            <div class="preloader-wrapper">
+                <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
 
-@model List<TimeTrackerManagementDTO.UserDTO>
+                <div class="spinner-layer spinner-yellow">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
 
-<!-- Pre-loader start -->
-<div class="theme-loader">
-    <div class="loader-track">
-        <div class="preloader-wrapper">
-            <div class="spinner-layer spinner-blue">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-            <div class="spinner-layer spinner-red">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-
-            <div class="spinner-layer spinner-yellow">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-
-            <div class="spinner-layer spinner-green">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
+                <div class="spinner-layer spinner-green">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Pre-loader end -->
-<div id="pcoded" class="pcoded">
-    <div class="pcoded-overlay-box"></div>
-    <div class="pcoded-container navbar-wrapper">
+    <!-- Pre-loader end -->
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
 
-        <!-- Include the navbar Top -->
-        @Html.Partial("~/Views/Includes/navbarTop.cshtml")
-        <!-- End of navbar Top-->
+            <!-- Include the navbar Top -->
+            @Html.Partial("~/Views/Includes/navbarTop.cshtml")
+            <!-- End of navbar Top-->
 
-        <div class="pcoded-main-container">
-            <div class="pcoded-wrapper">
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
 
-                <!-- Include the navbar Left-->
-                @Html.Partial("~/Views/Includes/navbarLeft.cshtml")
-                <!-- End of navbar Left-->
+                    <!-- Include the navbar Left-->
+                    @Html.Partial("~/Views/Includes/navbarLeft.cshtml")
+                    <!-- End of navbar Left-->
 
-                <div class="pcoded-content">
-                    <!-- Page-header start -->
-                    <div style="max-width: 2680px; width: 100%; margin: 0 auto;" class="page-header">
-                        <div class="page-block">
-                            <div class="row align-items-center">
-                                <div class="col-md-8">
-                                    <div class="page-header-title">
-                                        <h5 class="m-b-10"> <i class="fa fa-home"></i> > Dashboard </h5>
-                                        <p class="m-b-0">Welcome to Timesheet Tracker System</p>
+                    <div class="pcoded-content">
+                        <!-- Page-header start -->
+                        <div style="max-width: 2680px; width: 100%; margin: 0 auto;" class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <div class="page-header-title">
+                                            <h5 class="m-b-10"> <i class="fa fa-home"></i> > Dashboard </h5>
+                                            <p class="m-b-0">Welcome to Timesheet Tracker System</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Page-header end -->
-                    <div class="pcoded-inner-content">
-                        <!-- Main-body start -->
-                        <div class="main-body">
-                            <div class="page-wrapper">
-                                <!-- Page-body start -->
-                                <div style="margin-top: 100px !important;" class="page-body">
-                                    <div class="row">
-                                        <!-- task, page, download counter  start -->
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="card">
-                                                <div class="card-block">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-8">
-                                                            <h4 class="text-c-purple">30</h4>
-                                                            <h6 class="text-muted m-b-0">Total Users</h6>
-                                                        </div>
-                                                        <div class="col-4 text-right">
-                                                            <i class="fa fa-bar-chart f-28"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer bg-c-purple">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-9">
-                                                            <p class="text-white m-b-0">% change</p>
-                                                        </div>
-                                                        <div class="col-3 text-right">
-                                                            <i class="fa fa-line-chart text-white f-16"></i>
+                        <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-body start -->
+                                    <div style="margin-top: 100px !important;" class="page-body">
+                                        <div class="row">
+                                            <!-- task, page, download counter  start -->
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-8">
+                                                                <h4 class="text-c-purple">30</h4>
+                                                                <h6 class="text-muted m-b-0">Total Users</h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <i class="fa fa-bar-chart f-28"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="card">
-                                                <div class="card-block">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-8">
-                                                            <h4 class="text-c-green">10+</h4>
-                                                            <h6 class="text-muted m-b-0">Active Users</h6>
-                                                        </div>
-                                                        <div class="col-4 text-right">
-                                                            <i class="fa fa-file-text-o f-28"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer bg-c-green">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-9">
-                                                            <p class="text-white m-b-0">% change</p>
-                                                        </div>
-                                                        <div class="col-3 text-right">
-                                                            <i class="fa fa-line-chart text-white f-16"></i>
+                                                    <div class="card-footer bg-c-purple">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-9">
+                                                                <p class="text-white m-b-0">% change</p>
+                                                            </div>
+                                                            <div class="col-3 text-right">
+                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="card">
-                                                <div class="card-block">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-8">
-                                                            <h4 class="text-c-blue">145</h4>
-                                                            <h6 class="text-muted m-b-0">
-                                                                Total Day Hours
-                                                            </h6>
-                                                        </div>
-                                                        <div class="col-4 text-right">
-                                                            <i class="fa fa-calendar-check-o f-28"></i>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-8">
+                                                                <h4 class="text-c-green">10+</h4>
+                                                                <h6 class="text-muted m-b-0">Active Users</h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <i class="fa fa-file-text-o f-28"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="card-footer bg-c-blue">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-9">
-                                                            <p class="text-white m-b-0">% change</p>
-                                                        </div>
-                                                        <div class="col-3 text-right">
-                                                            <i class="fa fa-line-chart text-white f-16"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-3 col-md-6">
-                                            <div class="card">
-                                                <div class="card-block">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-8">
-                                                            <h4 class="text-c-red">40</h4>
-                                                            <h6 class="text-muted m-b-0">Total Absences</h6>
-                                                        </div>
-                                                        <div class="col-4 text-right">
-                                                            <i class="fa fa-hand-o-down f-28"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer bg-c-red">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-9">
-                                                            <p class="text-white m-b-0">% change</p>
-                                                        </div>
-                                                        <div class="col-3 text-right">
-                                                            <i class="fa fa-line-chart text-white f-16"></i>
+                                                    <div class="card-footer bg-c-green">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-9">
+                                                                <p class="text-white m-b-0">% change</p>
+                                                            </div>
+                                                            <div class="col-3 text-right">
+                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!--  project and team member start -->
-                                        <div class="col-xl-12 col-md-12">
-                                            <div class="card table-card">
-                                                <div class="card-header">
-                                                    <h5>My Timesheet</h5>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-8">
+                                                                <h4 class="text-c-blue">145</h4>
+                                                                <h6 class="text-muted m-b-0">
+                                                                    Total Day Hours
+                                                                </h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <i class="fa fa-calendar-check-o f-28"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer bg-c-blue">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-9">
+                                                                <p class="text-white m-b-0">% change</p>
+                                                            </div>
+                                                            <div class="col-3 text-right">
+                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="card-block">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Idtrack</th>
-                                                                    <th>Username</th>
-                                                                    <th>CreatedAt</th>
-                                                                    <th>Email</th>
-                                                                    <th>Profile</th>
-                                                                    <th>Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach (var user in Model) {
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-8">
+                                                                <h4 class="text-c-red">40</h4>
+                                                                <h6 class="text-muted m-b-0">Total Absences</h6>
+                                                            </div>
+                                                            <div class="col-4 text-right">
+                                                                <i class="fa fa-hand-o-down f-28"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer bg-c-red">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-9">
+                                                                <p class="text-white m-b-0">% change</p>
+                                                            </div>
+                                                            <div class="col-3 text-right">
+                                                                <i class="fa fa-line-chart text-white f-16"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--  project and team member start -->
+                                            <div class="col-xl-12 col-md-12">
+                                                <div class="card table-card">
+                                                    <div class="card-header">
+                                                        <h5>My Timesheet</h5>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-hover">
+                                                                <thead>
                                                                     <tr>
-                                                                        <td>@user.IdTrack</td>
-                                                                        <td>@user.Username</td>
-                                                                        <td>@user.CreatedAt</td>
-                                                                        <td>@user.Email</td>
-                                                                        <td><img class="img-40 img-radius" src="data:image/jpeg;base64,@user.ProfileImgBase64" alt="N/A" /></td>
-                                                                        <td>
-                                                                            <form action="@Url.Action("GetData", "Dashboard")" method="post" style="display:inline;">
-                                                                                <input type="hidden" name="id" value="@user.IdTrack" />
-                                                                                <button type="submit">Update</button>
-                                                                            </form>
-                                                                            |
-                                                                            <form action="@Url.Action("DeleteData", "Dashboard")" method="post" style="display:inline;" onsubmit="return deleteUser(this);">
-                                                                                <input type="hidden" name="id" value="@user.IdTrack" />
-                                                                                <button type="submit">Delete</button>
-                                                                            </form>
-                                                                        </td>
+                                                                        <th>Idtrack</th>
+                                                                        <th>Username</th>
+                                                                        <th>CreatedAt</th>
+                                                                        <th>Email</th>
+                                                                        <th>Profile</th>
+                                                                        <th>Action</th>
                                                                     </tr>
-                                                                }
-                                                            </tbody>
-                                                        </table>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach (var user in Model) {
+                                                                        <tr>
+                                                                            <td>@user.IdTrack</td>
+                                                                            <td>@user.Username</td>
+                                                                            <td>@user.CreatedAt</td>
+                                                                            <td>@user.Email</td>
+                                                                            <td><img class="img-40 img-radius" src="data:image/jpeg;base64,@user.ProfileImgBase64" alt="N/A" /></td>
+                                                                            <td>
+                                                                                <form action="@Url.Action("GetData", "Dashboard")" method="post" style="display:inline;">
+                                                                                    <input type="hidden" name="id" value="@user.IdTrack" />
+                                                                                    <button type="submit">Update</button>
+                                                                                </form>
+                                                                                |
+                                                                                <form action="@Url.Action("DeleteData", "Dashboard")" method="post" style="display:inline;" onsubmit="return deleteUser(this);">
+                                                                                    <input type="hidden" name="id" value="@user.IdTrack" />
+                                                                                    <button type="submit">Delete</button>
+                                                                                </form>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!--  project and team member end -->
                                         </div>
-                                        <!--  project and team member end -->
                                     </div>
+                                    <!-- Page-body end -->
                                 </div>
-                                <!-- Page-body end -->
+                                <div id="styleSelector"></div>
                             </div>
-                            <div id="styleSelector"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     function deleteUser(form) {

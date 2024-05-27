@@ -40,6 +40,7 @@ namespace TimeTrackerManagement.Controllers
             }
         }
         public ActionResult Logout() {
+            Session.Abandon();
             return ShowModal("Index", "Home", "Thank you for using the app!");
         }
         public ActionResult ShowModal(string actionName, string controllerName, string msg) {
